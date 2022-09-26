@@ -15,27 +15,53 @@
         background-repeat: no-repeat;
         background-size: cover;
       }
+      span{
+      color : yellow;
+      }
       </style>
     <script type="text/javascript">
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-(() => {
-  'use strict'
+  function checkvalidate()
+    {
+     var email = document.getElementById('email').value
+     var pass = document.getElementById('password').value
+     var fname = document.getElementById('fname').value
+      var lname = document.getElementById('lname').value
+      var num = document.getElementById('number').value
+     var decimal=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+     var letters = /^[A-Za-z]+$/;
+     var phoneno = /^\d{10}$/;
+    (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)))
+     if (!(fname.match(letters)))
+    {
+    document.getElementById('errorinfname').innerHTML = "First Name should contain only alphabets";
+    return false;
+     }
+     else if(!(lname.match(letters)))
+     {
+        document.getElementById('errorinfname').innerHTML = "";
+       document.getElementById('errorinlname').innerHTML = "Last Name should contain only alphabets";
+       return false;
+     }
+     else if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)))
+    {
+    document.getElementById('errorinlname').innerHTML = "";
+    document.getElementById('errorinemail').innerHTML = "Invalid Email";
+    return false;
+     }
+     else if(!(pass.match(decimal)))
+     {
+      document.getElementById('errorinemail').innerHTML = "";
+       document.getElementById('errorinpass').innerHTML = "Invalid Password";
+       return false;
+     }
+     else if(!(num.match(phoneno)))
+     {
+        document.getElementById('errorinpass').innerHTML = "";
+       document.getElementById('errorinphone').innerHTML = "Invalid Phone Number";
+       return false;
+     }
 
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
-
-      form.classList.add('was-validated')
-    }, false)
-  })
-})()
+    }
     </script>
 </head>
 <body>
@@ -98,36 +124,42 @@
   </nav>
     <div class="bg-image">
       <div class="container h-100 d-flex align-items-center justify-content-start">
-        <form class="needs-validation" >
+        <form class="needs-validation" action="signup.html" method="post">
+            {% csrf_token %}
             <div class="mb-3">
               <h2 style="font-family:'Times New Roman', Times, serif; color: rgba(224, 178, 12, 0.664); text-align: center;">Sign Up </h2>
-              <label for="validationCustom01" class="form-label text-white">First name</label>
-              <input type="text" class="form-control" id="validationCustom01" placeholder="Enter First Name" required>
+              <label for="fname" class="form-label text-white">First name</label>
+              <input type="text" class="form-control" id="fname" placeholder="Enter First Name" required>
+                <span id="errorinfname"></span>
               <div class="valid-feedback">
                 Looks good!
               </div>
             </div>
             <div class="mb-3">
-              <label for="validationCustom02" class="form-label text-white">Last name</label>
-              <input type="text" class="form-control" id="validationCustom02" placeholder="Enter Last Name" required>
+              <label for="lname" class="form-label text-white">Last name</label>
+              <input type="text" class="form-control" id="lname" placeholder="Enter Last Name" required>
+                <span id="errorinlname"></span>
               <div class="valid-feedback">
                 Looks good!
               </div>
             </div>
               <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label text-white">Email Address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Email" aria-describedby="emailHelp" required>
+                <label for="email" class="form-label text-white">Email Address</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email" aria-describedby="emailHelp" required>
+                  <span id="errorinemail"></span>
                 <div class="invalid-feedback">
                     Please enter email.
                   </div>
               </div>
             <div class="mb-3">
-                <label for="pwd" class="form-label text-white">Password </label>
-                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
+                <label for="password" class="form-label text-white">Password </label>
+                <input type="password" class="form-control" id="password" placeholder="Enter password" name="pswd" required>
+                <span id="errorinpass"></span>
             </div>
             <div class="mb-3">
-              <label for="validationCustom05" class="form-label text-white">Phone Number</label>
-              <input type="number" class="form-control" id="validationCustom05" placeholder="Enter Phone Number" required>
+              <label for="number" class="form-label text-white">Phone Number</label>
+              <input type="text" class="form-control" id="number" placeholder="Enter Phone Number" name="pno" required>
+                <span id="errorinphone"></span>
               <div class="invalid-feedback">
                 Please provide a valid phone number.
               </div>
@@ -144,7 +176,7 @@
               </div>
             </div>
             <div class="mb-3">
-              <button class="btn btn-primary" type="submit">Submit form</button>
+              <button class="btn btn-primary" onclick="return checkvalidate();" type="submit">Submit form</button>
             </div>
           </form>
     </div>

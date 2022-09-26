@@ -9,6 +9,9 @@
     <title>Food Delivery Website | Sign In Page</title>
     <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
 <style>
+span{
+color : red;
+}
 .nav-link {
     color: rgb(12 228 234 / 90%);
 }
@@ -34,7 +37,28 @@
     color: rgb(16 220 240 / 74%);
 }
 </style>
+<script type="text/javascript">
+    function checkvalidation()
+    {
+     var email = document.getElementById('exampleInputEmail1').value
+     var pass = document.getElementById('exampleInputPassword1').value
+     var decimal=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
 
+     if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)))
+    {
+    document.getElementById('errorinemail').innerHTML = "Invalid Email/Username";
+    return false;
+     }
+     else if(!(pass.match(decimal)))
+     {
+     document.getElementById('errorinemail').innerHTML = "";
+       document.getElementById('errorinpass').innerHTML = "Invalid Password";
+       return false;
+     }
+
+    }
+
+</script>
   </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-dark">
@@ -104,20 +128,20 @@
         <div class="mb-3">
             <h2 style="font-family:'Times New Roman', Times, serif; color: white; text-align: center;">Sign In </h2>
           <label for="exampleInputEmail1" class="form-label text-white">Email address</label>
-         <input type="email" class="form-control" id="exampleInputEmail1" name="loginusername" aria-describedby="emailHelp" >
-          <span id="errorinemail"></span>
+         <input type="email" class="form-control" id="exampleInputEmail1" name="loginusername" aria-describedby="emailHelp" required>
+            <span id="errorinemail"></span>
             <div id="emailHelp" class="form-text text-white">We'll never share your email with anyone else.</div>
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label text-white">Password</label>
-           <input type="password" class="form-control" name="loginpassword" id="exampleInputPassword1" >
-            <span id="errorinpassword"></span>
+           <input type="password" class="form-control" name="loginpassword" id="exampleInputPassword1" required>
+            <span id="errorinpass"></span>
         </div>
         <div class="mb-3 form-check">
           <input type="checkbox" class="form-check-input" id="exampleCheck1">
           <label class="form-check-label text-white" for="exampleCheck1">Stay Signed In</label>
         </div>
-         <button type="submit" class="btn btn-primary">Sign In</button>
+         <button type="submit" onclick="checkvalidation();" class="btn btn-primary">Sign In</button>
       </form>
 </div>
 

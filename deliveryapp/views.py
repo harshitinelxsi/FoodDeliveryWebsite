@@ -24,7 +24,6 @@ def successsignedup(request):
 
 def handelLogout(request):
     logout(request)
-    messages.success(request, "Successfully logged out")
     return render(request, 'index.html')
 
 
@@ -35,26 +34,21 @@ def signin(request):
         user = authenticate(username=loginusername1, password=loginpassword1)
         if user is not None:
             login(request, user)
-            messages.success(request, "Successfully logged in")
             return render(request, 'success.html')
-        else:
-            messages.error(request, "Invalid Credentials, Please try again ")
-            return render(request, 'fail.html')
+
     return render(request, 'signin.html')
+
+
 
 def signup(request):
     if request.method == "POST":
-        firstname = request.POST['fname']
-        print(firstname)
-        lastname = request.POST['lname']
-        print(lastname)
         email = request.POST['email']
         print(email)
-        password = request.POST['password']
+        password = request.POST['pswd']
         print(password)
-        zipcode = request.POST['zipcode']
 
         myuser = User.objects.create_user(username=email, password=password)
         myuser.save()
+        login(request, myuser)
         return render(request, 'successsignedup.html')
     return render(request, 'signup.html')
