@@ -1,0 +1,40 @@
+.carousel-inner {
+    position: relative;
+    width: fit-content;
+    height: 79%;
+    width: 90%;
+    margin: auto;
+    overflow: hidden;
+  }
+  .carousel-content {
+  position: absolute;
+  bottom: 10%;
+  left: 5%;
+  z-index: 20;
+  color: rgb(20, 1, 1);
+  text-shadow: 0 1px 2px rgba(0,0,0,.6);
+}
+.nav-link:focus{
+    color: rgb(12 228 234 / 90%);
+  }
+
+
+.navbar-nav {
+    --bs-nav-link-color: rgb(10 225 215);
+    --bs-nav-link-hover-color: rgb(16 220 240 / 74%);
+    --bs-nav-link-disabled-color: var(--bs-navbar-disabled-color);
+}
+.navbar-brand {
+    color: rgb(12 228 234 / 90%);
+
+}
+.navbar-brand:hover{
+    color: rgb(16 220 240 / 74%);
+}
+
+.nav-link {
+    color: rgb(12 228 234 / 90%);
+}
+.nav-link:hover {
+    color: rgb(12 228 234 / 90%);
+}
